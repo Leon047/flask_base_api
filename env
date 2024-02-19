@@ -1,0 +1,12 @@
+# Confidential information.
+# Add file name to '.gitignore'.
+
+# ** General ** 
+# App secret key (Change me!).
+# Generate a key with 'secrets.token_hex(24)'.
+export SECRET_KEY='2684b67b7067cdd17f6655c7a3e7e8fe3489e632f3449ab4'
+
+# ** Database ** 
+# Set the configuration parameter for connecting to the database.
+# For example:(mysql://, postgresql://, sqlite://)
+export SQLALCHEMY_DATABASE_URI='sqlite://'
