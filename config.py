@@ -6,10 +6,14 @@ import os
 
 
 class Config:
-    """Set Flask configuration."""
-
+    """
+    Set Flask configuration.
+    """
     # General Config
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = True    # Only for debugging while developing
+    HOST = '0.0.0.0'
+    PORT = 8000
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')

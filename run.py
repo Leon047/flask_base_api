@@ -29,6 +29,6 @@ def internal_server_error(error) -> tuple[dict, int]:
 
 if __name__ == '__main__':
     """
-    Run the Flask app in debug mode
+    Run the Flask app
     """
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host=app.config['HOST'], port=app.config['PORT'])
