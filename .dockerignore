@@ -1,10 +1,13 @@
 # Ignore environment-specific files
-#.env
+.env
 
-# Ignore alembic files
-alembic
-instance
-src/migrations
+# Ignore Git related files and directories
+.git
+.gitignore
+
+# Ignore licensing and readme files
+LICENSE
+README.md
 
 # Ignore Python bytecode cache directories
 __pycache__
@@ -13,9 +16,6 @@ tests/__pycache__
 tests/test_routs/__pycache__
 tests/test_schemas/__pycache__
 
-# Ignore pytest cache directory
+# Ignore pytest cache directories
 .pytest_cache
 tests/.pytest_cache
-
-# Ignore IDE and editor specific files
-.vscode/

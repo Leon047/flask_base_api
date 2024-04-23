@@ -7,7 +7,7 @@ import os
 
 class Config:
     """
-    Set Flask configuration.
+    ** Set Flask configuration. **
     """
     # General Config
     SECRET_KEY = os.environ.get('SECRET_KEY')

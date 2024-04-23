@@ -5,11 +5,11 @@ Purpose:
 * The run.py file serves as the entry point for launching the Flask application.
 
 Usage:
-* Execute 'python run.py' in the terminal to start the Flask development server.
+* Execute (python run.py) in the terminal to start the Flask development server.
 * Customize the (env and config.py) files to include any necessary
   initialization or configuration before running the application.
 
-* Doc: https://flask.palletsprojects.com/en/3.0.x/
+Doc: https://flask.palletsprojects.com/en/3.0.x/
 
 -------------============= * Only for development! * =============-------------
 """
