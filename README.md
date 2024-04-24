@@ -60,39 +60,39 @@ git clone https://github.com/Leon047/flask_base_api.git
 
 Make changes to the `.env` file:
 <pre>
-  # ** General ** 
-  # App secret key (Change me!).
-  # Generate a key with 'secrets.token_hex(24)'.
-  export SECRET_KEY='2684b67b7067cdd17f6655c7a3e7e8fe3489e632f3449ab4'
+# ** General ** 
+# App secret key (Change me!).
+# Generate a key with 'secrets.token_hex(24)'.
+export SECRET_KEY='2684b67b7067cdd17f6655c7a3e7e8fe3489e632f3449ab4'
   
-  # ** Database ** 
-  # Set the configuration parameter for connecting to the database.
-  # For example:(mysql://, postgresql://, sqlite://)
-  export SQLALCHEMY_DATABASE_URI='sqlite:///sqlite_database.db'
+# ** Database ** 
+# Set the configuration parameter for connecting to the database.
+# For example:(mysql://, postgresql://, sqlite://)
+export SQLALCHEMY_DATABASE_URI='sqlite:///sqlite_database.db'
 </pre>
 
 Basic configuration in the `config.py` file:
 <pre>
-  class Config:
-      """
-      Set Flask configuration.
-      """
-      # General Config
-      SECRET_KEY = os.environ.get('SECRET_KEY')
-      DEBUG = True    # Only for debugging while developing
-      HOST = '0.0.0.0'
-      PORT = 8000
-  
-      # Database
-      SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
-      SQLALCHEMY_ECHO = False
-      SQLALCHEMY_TRACK_MODIFICATIONS = False
+class Config:
+    """
+    Set Flask configuration.
+    """
+    # General Config
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = True    # Only for debugging while developing
+    HOST = '0.0.0.0'
+    PORT = 8000
+ 
+    # Database
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 </pre>
 
 Basic configuration in the `alembic.ini` file:
 <pre>
-  # sqlalchemy.url
-  sqlalchemy.url = sqlite:///sqlite_database.db
+# sqlalchemy.url
+sqlalchemy.url = sqlite:///sqlite_database.db
 </pre>
 
 
@@ -134,32 +134,32 @@ Docker Compose includes a configuration for Flask without a database. Choose a s
 
 Dockerfile:
 <pre>
-  FROM python:3.10
-  WORKDIR /back
-  COPY . /back
-  RUN apt-get update -y &&\
-    pip install --upgrade pip &&\
-    pip install --no-cache -r requirements.txt
+FROM python:3.10
+WORKDIR /back
+COPY . /back
+RUN apt-get update -y &&\
+  pip install --upgrade pip &&\
+  pip install --no-cache -r requirements.txt
 </pre>
 
 docker-compose.dev.yml:
 <pre>
-  version: '3'
-  services:
-  
-    back:
-      build: 
-        context: .
-        dockerfile: Dockerfile
-      volumes:
-        - .:/back
-      container_name: back_dev
-      ports:
-        - '8000:8000'
-      command: python run.py
-      environment:
-        SECRET_KEY: $SECRET_KEY
-        SQLALCHEMY_DATABASE_URI: $SQLALCHEMY_DATABASE_URI
+version: '3'
+services:
+
+  back:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/back
+    container_name: back_dev
+    ports:
+      - '8000:8000'
+    command: python run.py
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      SQLALCHEMY_DATABASE_URI: $SQLALCHEMY_DATABASE_URI
 </pre>
 
 Set environment variables:
@@ -180,48 +180,48 @@ The project will start:
   
 Expected output:
 <pre>
-  {
-    "api": "v1",
-    "status": "success",
-    "data": "Hello World"
-  }
+{
+  "api": "v1",
+  "status": "success",
+  "data": "Hello World"
+}
 </pre>
 
 
 ## Project Structure
 
 <pre>
-  flask_base_api/
-  │
-  ├── src/
-  │   ├── __init__.py
-  │   ├── messages.py
-  │   ├── models.py
-  │   ├── schemas.py
-  │   ├── utils.py 
-  │   ├── views.py
-  │   └── ...
-  │ 
-  ├── tests/
-  │   ├── __init__.py
-  │   ├── conftest.py 
-  │   ├── /test_routs
-  │   ├── /test_schemas
-  │   └── ...
-  │ 
-  ├── alembic.ini 
-  ├── config.py
-  ├── docker-compose.dev.yml
-  ├── Dockerfile
-  ├── .dockerignore 
-  ├── .env
-  ├── error.log
-  ├── .gitignore 
-  ├── LICENSE
-  ├── README.md 
-  ├── requirements.txt
-  ├── run.py
-  └── sqlite_database.db 
+flask_base_api/
+│
+├── src/
+│   ├── __init__.py
+│   ├── messages.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── utils.py 
+│   ├── views.py
+│   └── ...
+│ 
+├── tests/
+│   ├── __init__.py
+│   ├── conftest.py 
+│   ├── /test_routs
+│   ├── /test_schemas
+│   └── ...
+│ 
+├── alembic.ini 
+├── config.py
+├── docker-compose.dev.yml
+├── Dockerfile
+├── .dockerignore 
+├── .env
+├── error.log
+├── .gitignore 
+├── LICENSE
+├── README.md 
+├── requirements.txt
+├── run.py
+└── sqlite_database.db 
 </pre>
 
 
