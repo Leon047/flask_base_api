@@ -2,7 +2,7 @@
 
 <div align='center'>
 
-[![Python](https://img.shields.io/static/v1?label=Python&message=v3.10.x&color=00CC11)](https://www.python.org/)
+[![Python](https://img.shields.io/static/v1?label=Python&message=v3.11.x&color=00CC11)](https://www.python.org/)
 [![Flask](https://img.shields.io/static/v1?label=Flask&message=v3.0.2&color=00CC11)](https://flask.palletsprojects.com/en/3.0.x/)
 [![Flask-SQLAlchemy](https://img.shields.io/static/v1?label=Flask-SQLAlchemy&message=v3.1.1&color=00CC11)](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/)
 [![Flask-RESTful](https://img.shields.io/static/v1?label=Flask-RESTful&message=v0.3.10&color=00CC11)](https://flask-restful.readthedocs.io/en/latest/)
@@ -63,12 +63,12 @@ Make changes to the `.env` file:
 # ** General ** 
 # App secret key (Change me!).
 # Generate a key with 'secrets.token_hex(24)'.
-export SECRET_KEY='2684b67b7067cdd17f6655c7a3e7e8fe3489e632f3449ab4'
+SECRET_KEY='2684b67b7067cdd17f6655c7a3e7e8fe3489e632f3449ab4'
   
 # ** Database ** 
 # Set the configuration parameter for connecting to the database.
 # For example:(mysql://, postgresql://, sqlite://)
-export SQLALCHEMY_DATABASE_URI='sqlite:///sqlite_database.db'
+SQLALCHEMY_DATABASE_URI='sqlite:///sqlite_database.db'
 </pre>
 
 Basic configuration in the `config.py` file:
@@ -101,11 +101,6 @@ sqlalchemy.url = sqlite:///sqlite_database.db
 Install dependencies:
 ```bash
 pip install --upgrade -r requirements.txt
-```
-
-Set environment variables:
-```bash
-source .env
 ```
 
 Initialization Alembic:
@@ -161,11 +156,6 @@ services:
       SECRET_KEY: $SECRET_KEY
       SQLALCHEMY_DATABASE_URI: $SQLALCHEMY_DATABASE_URI
 </pre>
-
-Set environment variables:
-```bash
-source .env
-```
 
 Build and run the Docker Compose services:
 ```bash
@@ -229,12 +219,7 @@ flask_base_api/
 
 In the project directory, after activating the `virtual environment`:
 
-Set environment variables:
-```bash
-source .env
-```
-
-Run tests.
+Run tests:
 ```bash
 pytest
 ```

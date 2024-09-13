@@ -8,6 +8,7 @@ Dependencies:
 
 Doc: https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/
 """
+
 import datetime
 from typing import Type
 from os import environ

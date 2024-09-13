@@ -2,7 +2,9 @@
 In (messages.py), you can add messages that will be used in
 the API for various responses.
 """
+
 from typing import Any
+
 
 def success_msg(data: Any) -> dict:
     msg = {
@@ -11,6 +13,7 @@ def success_msg(data: Any) -> dict:
         "data": data
     }
     return msg
+
 
 def error_msg(error_msg: dict) -> dict:
     msg = {

@@ -6,6 +6,9 @@ alembic
 instance
 src/migrations
 
+# Ignore logs
+error.log
+
 # Ignore Python bytecode cache directories
 __pycache__
 src/__pycache__
