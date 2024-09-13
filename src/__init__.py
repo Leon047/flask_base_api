@@ -16,6 +16,7 @@ Doc:
 * [Flask-Marshmallow](https://flask-marshmallow.readthedocs.io/)
 * [Flask-Alembic](https://flask-alembic.readthedocs.io/)
 """
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
@@ -25,6 +26,7 @@ from flask_alembic import Alembic
 db = SQLAlchemy()
 ma = Marshmallow()
 alembic = Alembic()
+
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)

@@ -7,16 +7,21 @@ Dependencies:
 
 Doc: https://flask.palletsprojects.com/en/3.0.x/testing/
 """
+
 import pytest
+from dotenv import load_dotenv
 
 from src import create_app, db
 from src.models import UserModel, PasswordModel, AuthTokenModel
+
+load_dotenv()
 
 TEST_USER = {
     'email': 'base_test_user@gmail.com',
     'username': 'base_test_user'
 }
 TEST_USER_PASSWORD = 'BaseTestUser1234'
+
 
 @pytest.fixture()
 def app():
@@ -32,7 +37,7 @@ def app():
     """
     app = create_app()
     app.config.update({
-        'TESTING': True,
+        'TESTING': True
     })
 
     # ** other setup can go here **
@@ -64,9 +69,11 @@ def app():
         except:
             print('The user has already been deleted.')
 
+
 @pytest.fixture()
 def client(app):
     return app.test_client()
+
 
 @pytest.fixture()
 def runner(app):

@@ -2,6 +2,7 @@
 This module defines a configuration class (Config) for Flask applications,
 allowing users to set various configuration options.
 """
+
 import os
 
 

@@ -7,6 +7,7 @@ Dependencies:
 
 Doc: https://marshmallow.readthedocs.io/en/stable/
 """
+
 import re
 from typing import Optional
 

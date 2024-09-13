@@ -8,6 +8,7 @@ Dependencies:
 
 Doc: https://flask-restful.readthedocs.io/en/latest/
 """
+
 from flask_restful import Resource
 from flask import request
 from marshmallow import ValidationError

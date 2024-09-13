@@ -1,3 +1,8 @@
+"""
+This module defines utility functions (utils.py) that provide shared
+functionality across the application.
+"""
+
 from typing import Callable, Any
 from functools import wraps
 from flask import request
@@ -5,6 +10,7 @@ from flask import request
 from .messages import ApiMessages as msg
 from .messages import error_msg
 from .models import AuthTokenModel
+
 
 def authenticate(func: Callable[..., Any]) -> Callable[..., Any]:
     """

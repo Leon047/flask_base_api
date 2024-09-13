@@ -13,19 +13,26 @@ Doc: https://flask.palletsprojects.com/en/3.0.x/
 
 -------------============= * Only for development! * =============-------------
 """
+
 import logging
+from dotenv import load_dotenv
+
 from src import create_app
 from src.messages import ApiMessages as msg
 from src.messages import error_msg
+
+load_dotenv()
 
 app = create_app()
 
 # Writes an error report to a file 'error.log'
 logging.basicConfig(filename='error.log', level=logging.ERROR)
 
+
 @app.errorhandler(500)
 def internal_server_error(error) -> tuple[dict, int]:
     return error_msg(msg.INTERNAL_ERROR), 500
+
 
 if __name__ == '__main__':
     """
