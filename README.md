@@ -98,33 +98,33 @@ sqlalchemy.url = sqlite:///sqlite_database.db
 
 ## Installation using venv
 
-Install dependencies:
+### 1. Install dependencies:
 ```bash
 pip install --upgrade -r requirements.txt
 ```
 
-Initialization Alembic:
+### 2. Initialization Alembic:
 ```bash
 alembic init alembic
 ```
 
-Generating the first migration:
+### 3. Generating the first migration:
 ```bash
 alembic revision -m 'Initial migration'
 ```
-
-Applying Migrations:
+### 4. Applying Migrations:
 ```bash
 alembic upgrade head
 ```
 
-Run the application:
+### 5. Run the application:
 ```bash
 python run.py
 ```
 
 
 ## Installation using Docker
+
 Docker Compose includes a configuration for Flask without a database. Choose a suitable version of the database and supplement it considering `Flask-Alembic`.
 
 Dockerfile:
@@ -157,7 +157,7 @@ services:
       SQLALCHEMY_DATABASE_URI: $SQLALCHEMY_DATABASE_URI
 </pre>
 
-Build and run the Docker Compose services:
+### Build and run the Docker Compose services:
 ```bash
 docker-compose -f docker-compose.dev.yml up --build
 ```
@@ -187,6 +187,7 @@ flask_base_api/
 │   ├── __init__.py
 │   ├── messages.py
 │   ├── models.py
+│   ├── routes.py
 │   ├── schemas.py
 │   ├── utils.py 
 │   ├── views.py
@@ -224,6 +225,20 @@ Run tests:
 pytest
 ```
 
+Expected result:
+<pre>
+============================ test session starts ======================================
+platform linux -- Python 3.11.10, pytest-8.1.1, pluggy-1.4.0
+rootdir: /home/mrleon/Documents/Projects/MyProjects/base/flask_base_api
+collected 30 items                                                                                                     
+
+tests/test_routs/test_auth_api.py ....                                           [ 13%]
+tests/test_routs/test_password_api.py ...                                        [ 23%]
+tests/test_routs/test_user_api.py ..............                                 [ 70%]
+tests/test_schemas/test_password_schema.py .........                             [100%]
+
+============================ 30 passed in 10.14s ======================================
+</pre>
 
 ## License
 
