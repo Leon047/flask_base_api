@@ -50,15 +50,9 @@ def create_app():
         # Creates database models
         db.create_all()
 
-        """
-        ** Importing classes and creating a new routes. **
-        """
-        from .views import UserApi, AuthApi, PasswordApi, HelloWorld
-
         # App routes
-        api.add_resource(UserApi, 'user')
-        api.add_resource(AuthApi, 'user/auth')
-        api.add_resource(PasswordApi, 'user/password')
-        api.add_resource(HelloWorld, 'hello')
+        from .routes import api_routes
+
+        api_routes(api)
 
         return app
