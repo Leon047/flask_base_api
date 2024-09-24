@@ -34,11 +34,20 @@ class UserModel(db.Model):
     email = db.Column(db.String(60), unique=True, nullable=False)
     datetime = db.Column(db.DateTime(timezone=True), default=func.now())
     confirm_user = db.Column(db.Boolean, default=False)
-
-    password = db.relationship('PasswordModel', backref='users', uselist=False,
-                                cascade='all, delete-orphan', lazy=True)
-    token = db.relationship('AuthTokenModel', backref='users', uselist=False,
-                            cascade='all, delete-orphan', lazy=True)
+    password = db.relationship(
+        'PasswordModel',
+        backref='users',
+        uselist=False,
+        cascade='all, delete-orphan',
+        lazy=True
+    )
+    token = db.relationship(
+        'AuthTokenModel',
+        backref='users',
+        uselist=False,
+        cascade='all, delete-orphan',
+        lazy=True
+    )
 
     def __repr__(self) -> str:
         return f'<User: {self.username}>'
@@ -102,14 +111,18 @@ class AuthTokenModel(db.Model):
             'sub': userid
         }
         self.token = jwt.encode(
-            payload, environ.get('SECRET_KEY'), algorithm='HS256'
+            payload,
+            environ.get('SECRET_KEY'),
+            algorithm='HS256'
         )
         return self.token
 
     def verify_auth_token(self, token: str) -> dict or bool:
         try:
             decoded_token = jwt.decode(
-                token, environ.get('SECRET_KEY'), algorithms='HS256',
+                token,
+                environ.get('SECRET_KEY'),
+                algorithms='HS256',
                 options={'require': ['exp', 'sub']}
             )
             return decoded_token

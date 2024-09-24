@@ -3,6 +3,7 @@ from marshmallow import ValidationError
 
 from src import schemas
 
+
 @pytest.mark.parametrize(
     'password, valid',
     [

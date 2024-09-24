@@ -28,6 +28,7 @@ class ApiMessages:
     """
     Error message should be 'dict'
     """
+
     # General messages
     MISSING_ARGUMENT = {'error': 'Missing argument.'}
     VALIDATION_ERROR = {'error': 'Validation error.'}
