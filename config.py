@@ -10,11 +10,13 @@ class Config:
     """
     ** Set Flask configuration. **
     """
-    # General Config
+
+    # General
     SECRET_KEY = os.environ.get('SECRET_KEY')
     DEBUG = True    # Only for debugging while developing
     HOST = '0.0.0.0'
     PORT = 8000
+    API_URL_PREFIX = '/api/v1/'
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')

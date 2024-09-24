@@ -44,7 +44,7 @@ def create_app():
     ma.init_app(app)
 
     # Initialize api
-    api = Api(app, prefix='/api/v1/')    # Set a prefix for API routes
+    api = Api(app, prefix=app.config['API_URL_PREFIX'])
 
     with app.app_context():
         # Creates database models
