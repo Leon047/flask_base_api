@@ -72,8 +72,11 @@ class UserApi(Resource):
             return error_msg(msg.MISSING_ARGUMENT), 400
 
         user = UserModel.query.filter_by(username=username).first()
-        if user is None or user.id is not auth['sub']:
-            return error_msg(msg.VALIDATION_ERROR), 404
+        if user is None:
+            return error_msg(msg.INVALID_USERNAME), 404
+
+        if user.id != auth['sub']:
+            return error_msg(msg.VALIDATION_ERROR), 403
 
         user_password = PasswordModel.query.filter_by(userid=user.id).first()
         password_is_valid = user_password.verify_password(
