@@ -23,12 +23,12 @@ from .schemas import UserSchema, PasswordSchema , AuthTokenSchema
 class UserApi(Resource):
 
     @authenticate
-    def get(self, auth) -> tuple[dict, int]:
+    def get(self, auth):
         user = UserModel.query.filter_by(id=auth['sub']).first()
         dump_user = UserSchema().dump(user)
         return success_msg(dump_user), 200
 
-    def put(self) -> tuple[dict, int]:
+    def put(self):
         user_data = request.json
         password = user_data.pop('password', None)
 
@@ -52,7 +52,7 @@ class UserApi(Resource):
         return success_msg(user_load), 201
 
     @authenticate
-    def patch(self, auth) -> tuple[dict, int]:
+    def patch(self, auth):
         try:
             load_user = UserSchema().load(request.json)
         except ValidationError as e:
@@ -64,7 +64,7 @@ class UserApi(Resource):
         return success_msg(load_user), 200
 
     @authenticate
-    def delete(self, auth) -> tuple[dict, int]:
+    def delete(self, auth):
         username = request.json.get('username')
         password = request.json.get('password')
 
@@ -77,7 +77,9 @@ class UserApi(Resource):
 
         user_password = PasswordModel.query.filter_by(userid=user.id).first()
         password_is_valid = user_password.verify_password(
-            password, user_password.password_hash)
+            password,
+            user_password.password_hash
+        )
         if password_is_valid:
             user.delete(user)
             return {}, 204
@@ -97,7 +99,9 @@ class PasswordApi(Resource):
 
         user_password = PasswordModel.query.filter_by(userid=auth['sub']).first()
         old_pssword_is_valid = user_password.verify_password(
-            old_password, user_password.password_hash)
+            old_password,
+            user_password.password_hash
+        )
 
         if old_pssword_is_valid:
             try:
@@ -116,7 +120,7 @@ class PasswordApi(Resource):
 
 class AuthApi(Resource):
 
-    def post(self) -> tuple[dict, int]:
+    def post(self):
         username = request.json.get('username')
         password = request.json.get('password')
 
@@ -129,7 +133,9 @@ class AuthApi(Resource):
 
         user_password = PasswordModel.query.filter_by(userid=user.id).first()
         password_is_valid = user_password.verify_password(
-            password, user_password.password_hash)
+            password,
+            user_password.password_hash
+        )
 
         if password_is_valid:
             user_token = AuthTokenModel.query.filter_by(userid=user.id).first()
@@ -158,5 +164,5 @@ class AuthApi(Resource):
 
 class HelloWorld(Resource):
 
-    def get(self) -> tuple[dict, int]:
+    def get(self):
         return success_msg('Hello World'), 200

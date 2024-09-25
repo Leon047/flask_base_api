@@ -12,6 +12,7 @@ TEST_USER = {
     'password': 'BaseTestUser1234'
 }
 
+
 @pytest.fixture()
 def test_auth_with_valid_data(client, app):
     new_user = {
@@ -30,8 +31,13 @@ def test_auth_with_valid_data(client, app):
         assert new_user.username == new_user['username']
         assert token == None
 
-    respons = client.post(AUTH_API_URL,
-        json={'username': new_user['username'],'password': new_user['password']})
+    respons = client.post(
+        AUTH_API_URL,
+        json={
+            'username': new_user['username'],
+            'password': new_user['password']
+        }
+    )
 
     assert respons.status_code == 201
 
@@ -43,6 +49,7 @@ def test_auth_with_valid_data(client, app):
 
         new_user.delete(new_user)
 
+
 @pytest.mark.parametrize(
     ('username', 'password', 'code'),
     [
@@ -52,10 +59,16 @@ def test_auth_with_valid_data(client, app):
     ]
 )
 def test_auth_with_invalid_data(client, username, password, code):
-    respons = client.post(AUTH_API_URL,
-        json={'username': username, 'password': password})
+    respons = client.post(
+        AUTH_API_URL,
+        json={
+            'username': username,
+            'password': password
+        }
+    )
 
     assert respons.status_code == code
+
 
 def test_delete_auth_user_token(client, app):
     with app.app_context():
@@ -64,7 +77,10 @@ def test_delete_auth_user_token(client, app):
 
         assert token is not None
 
-    respons = client.delete(AUTH_API_URL, headers={'Authorization': token.token})
+    respons = client.delete(
+        AUTH_API_URL,
+        headers={'Authorization': token.token}
+    )
 
     assert respons.status_code == 204
 
