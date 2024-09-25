@@ -9,11 +9,12 @@ Dependencies:
 Doc: https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/
 """
 
+import os
 import datetime
 from typing import Type
-from os import environ
 
 import jwt
+from dotenv import load_dotenv
 from sqlalchemy.sql import func
 from sqlalchemy.orm import backref
 from sqlalchemy.event import listens_for
@@ -21,9 +22,17 @@ from passlib.context import CryptContext
 
 from src import db
 
+load_dotenv()
+
 # Configuration of CryptContext for using bcrypt
 # and automatic management of deprecated algorithms.
-pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+PWD_CONTEXT = CryptContext(schemes=['bcrypt'], deprecated='auto')
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# JWT settings
+JWT_ALGORITHM = 'HS256'
+JWT_EXPIRATION_DAYS = 3  # Token lifetime in days
 
 
 class UserModel(db.Model):
@@ -82,10 +91,10 @@ class PasswordModel(db.Model):
         self.last_update = func.now()
 
     def hash_password(self, password: str) -> None:
-        self.password_hash = pwd_context.hash(password)
+        self.password_hash = PWD_CONTEXT.hash(password)
 
     def verify_password(self, password: str, password_hash: str) -> bool:
-        return pwd_context.verify(password, password_hash)
+        return PWD_CONTEXT.verify(password, password_hash)
 
     def create(self, password: Type['PasswordModel']) -> None:
         db.session.add(password)
@@ -107,13 +116,13 @@ class AuthTokenModel(db.Model):
 
     def get_auth_token(self, userid: int) -> str:
         payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=3),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=JWT_EXPIRATION_DAYS),
             'sub': userid
         }
         self.token = jwt.encode(
             payload,
-            environ.get('SECRET_KEY'),
-            algorithm='HS256'
+            SECRET_KEY,
+            algorithm=JWT_ALGORITHM
         )
         return self.token
 
@@ -121,8 +130,8 @@ class AuthTokenModel(db.Model):
         try:
             decoded_token = jwt.decode(
                 token,
-                environ.get('SECRET_KEY'),
-                algorithms='HS256',
+                SECRET_KEY,
+                algorithms=JWT_ALGORITHM,
                 options={'require': ['exp', 'sub']}
             )
             return decoded_token
