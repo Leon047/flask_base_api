@@ -35,7 +35,7 @@ class UserSchema(Schema):
             raise ValidationError(msg.USERNAME_IS_ALL_DIGITS_ERROR)
 
         existing_user = UserModel.query.filter_by(username=value).first()
-        if existing_user is not None:
+        if existing_user != None:
             raise ValidationError(msg.USER_EXIST)
 
     @validates('email')
@@ -44,7 +44,7 @@ class UserSchema(Schema):
             raise ValidationError(msg.EMAIL_INVALID_FORMAT_ERROR)
 
         existing_user = UserModel.query.filter_by(email=value).first()
-        if existing_user is not None:
+        if existing_user != None:
             raise ValidationError(msg.EMAIL_EXIST)
 
 
