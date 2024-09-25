@@ -44,7 +44,7 @@ def test_auth_with_valid_data(client, app):
     with app.app_context():
         token = AuthTokenModel.query.filter_by(userid=new_user.id).first()
 
-        assert token is not None
+        assert token != None
         assert token.token in respons.data
 
         new_user.delete(new_user)
@@ -75,7 +75,7 @@ def test_delete_auth_user_token(client, app):
         user = UserModel.query.filter_by(username=TEST_USER['username']).first()
         token = AuthTokenModel.query.filter_by(userid=user.id).first()
 
-        assert token is not None
+        assert token != None
 
     respons = client.delete(
         AUTH_API_URL,
@@ -89,6 +89,6 @@ def test_delete_auth_user_token(client, app):
         password = PasswordModel.query.filter_by(userid=user.id).first()
         token = AuthTokenModel.query.filter_by(userid=user.id).first()
 
-        assert user is not None
-        assert password is not None
+        assert user != None
+        assert password != None
         assert token is None

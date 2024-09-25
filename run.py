@@ -30,7 +30,7 @@ logging.basicConfig(filename='error.log', level=logging.ERROR)
 
 
 @app.errorhandler(500)
-def internal_server_error(error) -> tuple[dict, int]:
+def internal_server_error(error):
     return error_msg(msg.INTERNAL_ERROR), 500
 
 
